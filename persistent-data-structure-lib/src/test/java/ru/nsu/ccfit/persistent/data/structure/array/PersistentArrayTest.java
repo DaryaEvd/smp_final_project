@@ -106,6 +106,9 @@ class PersistentArrayTest {
         persistentArrayrent.get(0).add("1");
         persistentArrayrent.get(0).add("2");
         persistentArrayrent.get(0).add("3");
+        persistentArrayrent.undo();
+//        Assertions.assertEquals(2, persistentArrayrent.getVersionCount());
+        Assertions.assertEquals(3, persistentArrayrent.get(0).size());
 
         persistentArrayrent.get(1).add("11");
         persistentArrayrent.get(1).add("22");
