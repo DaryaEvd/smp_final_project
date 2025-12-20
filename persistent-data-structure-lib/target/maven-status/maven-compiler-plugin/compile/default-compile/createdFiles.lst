@@ -1,0 +1,15 @@
+ru/nsu/ccfit/persistent/data/structure/node/ModificationBoxNode.class
+ru/nsu/ccfit/persistent/data/structure/node/FatNode.class
+ru/nsu/ccfit/persistent/data/structure/node/SlimNode.class
+ru/nsu/ccfit/persistent/data/structure/map/FatNodePersistentMap.class
+ru/nsu/ccfit/persistent/data/structure/array/utils/PersistentCollection.class
+ru/nsu/ccfit/persistent/data/structure/list/PersistentDoubleLinkedList.class
+ru/nsu/ccfit/persistent/data/structure/array/utils/ArrayNode.class
+ru/nsu/ccfit/persistent/data/structure/array/PersistentArray$PersistentArrayIterator.class
+ru/nsu/ccfit/persistent/data/structure/list/PersistentDoubleLinkedList$1.class
+ru/nsu/ccfit/persistent/data/structure/PersistentStructure.class
+ru/nsu/ccfit/persistent/data/structure/node/ModificationBox.class
+ru/nsu/ccfit/persistent/data/structure/array/utils/ArrayHead.class
+ru/nsu/ccfit/persistent/data/structure/array/PersistentArray.class
+ru/nsu/ccfit/persistent/data/structure/map/PersistentMap.class
+ru/nsu/ccfit/persistent/data/structure/node/ModificationType.class

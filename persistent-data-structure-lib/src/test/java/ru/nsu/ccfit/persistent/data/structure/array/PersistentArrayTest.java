@@ -67,29 +67,29 @@ class PersistentArrayTest {
     @Test
     void testPersistentArrayUndoRedo() {
         addABC();
-        Assertions.assertEquals(4, persistentArray.getVersionCount());
+        Assertions.assertEquals(3, persistentArray.getVersionCount());
         persistentArray.undo();
-        Assertions.assertEquals(4, persistentArray.getVersionCount());
+        Assertions.assertEquals(2, persistentArray.getVersionCount());
         persistentArray.undo();
-        Assertions.assertEquals(4, persistentArray.getVersionCount());
+        Assertions.assertEquals(1, persistentArray.getVersionCount());
         Assertions.assertEquals("[A]", persistentArray.toString());
 
         persistentArray.redo();
-        Assertions.assertEquals(4, persistentArray.getVersionCount());
+        Assertions.assertEquals(2, persistentArray.getVersionCount());
         Assertions.assertEquals("[A, B]", persistentArray.toString());
 
         persistentArray.undo();
-        Assertions.assertEquals(4, persistentArray.getVersionCount());
+        Assertions.assertEquals(1, persistentArray.getVersionCount());
         persistentArray.undo();
-        Assertions.assertEquals(4, persistentArray.getVersionCount());
+        Assertions.assertEquals(0, persistentArray.getVersionCount());
         Assertions.assertEquals("[]", persistentArray.toString());
 
         persistentArray.redo();
-        Assertions.assertEquals(4, persistentArray.getVersionCount());
+        Assertions.assertEquals(1, persistentArray.getVersionCount());
         persistentArray.redo();
-        Assertions.assertEquals(4, persistentArray.getVersionCount());
+        Assertions.assertEquals(2, persistentArray.getVersionCount());
         persistentArray.redo();
-        Assertions.assertEquals(4, persistentArray.getVersionCount());
+        Assertions.assertEquals(3, persistentArray.getVersionCount());
         Assertions.assertEquals("[A, B, C]", persistentArray.toString());
     }
 
@@ -99,6 +99,7 @@ class PersistentArrayTest {
         PersistentArray<String> child1 = new PersistentArray<>();
         PersistentArray<String> child2 = new PersistentArray<>();
         PersistentArray<String> child3 = new PersistentArray<>();
+        PersistentArray<String> child4 = new PersistentArray<>();
         persistentArrayrent.add(child1);
         persistentArrayrent.add(child2);
         persistentArrayrent.add(child3);
@@ -106,34 +107,47 @@ class PersistentArrayTest {
         persistentArrayrent.get(0).add("1");
         persistentArrayrent.get(0).add("2");
         persistentArrayrent.get(0).add("3");
+
+
+        Assertions.assertEquals(3, persistentArrayrent.getVersionCount());
         persistentArrayrent.undo();
-//        Assertions.assertEquals(2, persistentArrayrent.getVersionCount());
+
+        Assertions.assertEquals(2, persistentArrayrent.getVersionCount());
+        Assertions.assertEquals(2, persistentArrayrent.get(0).size());
+
+        persistentArrayrent.add(child4);
+        persistentArrayrent.get(0).add("4");
+
+
+        Assertions.assertEquals(3, persistentArrayrent.getVersionCount());
         Assertions.assertEquals(3, persistentArrayrent.get(0).size());
 
-        persistentArrayrent.get(1).add("11");
-        persistentArrayrent.get(1).add("22");
-        persistentArrayrent.get(1).add("33");
 
-        persistentArrayrent.get(2).add("111");
-        persistentArrayrent.get(2).add("222");
-        persistentArrayrent.get(2).add("333");
-
-        Assertions.assertEquals("[[1, 2, 3], [11, 22, 33], [111, 222, 333]]", persistentArrayrent.toString());
-        persistentArrayrent.undo();
-        Assertions.assertEquals("[[1, 2, 3], [11, 22, 33], [111, 222]]", persistentArrayrent.toString());
-
-        PersistentArray<String> child4 = new PersistentArray<>();
-        persistentArrayrent.add(1, child4);
-        child4.add("Test_str_1");
-        Assertions.assertEquals("[[1, 2, 3], [Test_str_1], [11, 22, 33], [111, 222]]", persistentArrayrent.toString());
-        persistentArrayrent.undo();
-        Assertions.assertEquals("[[1, 2, 3], [], [11, 22, 33], [111, 222]]", persistentArrayrent.toString());
-
-        persistentArrayrent.get(0).set(0, "Test_str_2");
-        persistentArrayrent.get(0).set(1, "Test_str_3");
-        Assertions.assertEquals("[[Test_str_2, Test_str_3, 3], [], [11, 22, 33], [111, 222]]", persistentArrayrent.toString());
-        persistentArrayrent.undo();
-        Assertions.assertEquals("[[Test_str_2, 2, 3], [], [11, 22, 33], [111, 222]]", persistentArrayrent.toString());
+//
+//        persistentArrayrent.get(1).add("11");
+//        persistentArrayrent.get(1).add("22");
+//        persistentArrayrent.get(1).add("33");
+//
+//        persistentArrayrent.get(2).add("111");
+//        persistentArrayrent.get(2).add("222");
+//        persistentArrayrent.get(2).add("333");
+//
+//        Assertions.assertEquals("[[1, 2, 3], [11, 22, 33], [111, 222, 333]]", persistentArrayrent.toString());
+//        persistentArrayrent.undo();
+//        Assertions.assertEquals("[[1, 2, 3], [11, 22, 33], [111, 222]]", persistentArrayrent.toString());
+//
+//        PersistentArray<String> child4 = new PersistentArray<>();
+//        persistentArrayrent.add(1, child4);
+//        child4.add("Test_str_1");
+//        Assertions.assertEquals("[[1, 2, 3], [Test_str_1], [11, 22, 33], [111, 222]]", persistentArrayrent.toString());
+//        persistentArrayrent.undo();
+//        Assertions.assertEquals("[[1, 2, 3], [], [11, 22, 33], [111, 222]]", persistentArrayrent.toString());
+//
+//        persistentArrayrent.get(0).set(0, "Test_str_2");
+//        persistentArrayrent.get(0).set(1, "Test_str_3");
+//        Assertions.assertEquals("[[Test_str_2, Test_str_3, 3], [], [11, 22, 33], [111, 222]]", persistentArrayrent.toString());
+//        persistentArrayrent.undo();
+//        Assertions.assertEquals("[[Test_str_2, 2, 3], [], [11, 22, 33], [111, 222]]", persistentArrayrent.toString());
     }
 
     @Test

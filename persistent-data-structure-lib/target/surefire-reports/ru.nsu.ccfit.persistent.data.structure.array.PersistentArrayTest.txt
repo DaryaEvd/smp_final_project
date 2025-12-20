@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: ru.nsu.ccfit.persistent.data.structure.array.PersistentArrayTest
+-------------------------------------------------------------------------------
+Tests run: 18, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.135 s <<< FAILURE! - in ru.nsu.ccfit.persistent.data.structure.array.PersistentArrayTest
+testPersistentArrayUndoRedo  Time elapsed: 0.015 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <4> but was: <3>
+	at ru.nsu.ccfit.persistent.data.structure.array.PersistentArrayTest.testPersistentArrayUndoRedo(PersistentArrayTest.java:70)
+

@@ -59,11 +59,14 @@ public class PersistentArray<E> extends PersistentCollection implements List<E> 
         this((int) Math.ceil(log(maxSize, (int) Math.pow(2, 5))), 5);
     }
 
+    private long currentVersion = 0;
+
     public PersistentArray(int depth, int bitPerEdge) {
         super(depth, bitPerEdge);
         ArrayHead<E> head = new ArrayHead<>();
         undo.push(head);
         redo.clear();
+        currentVersion = 0;
     }
 
     public PersistentArray(PersistentArray<E> other) {
@@ -71,16 +74,20 @@ public class PersistentArray<E> extends PersistentCollection implements List<E> 
         this.undo.addAll(other.undo);
         this.redo.addAll(other.redo);
         this.parent = other.parent;
+        this.currentVersion = other.currentVersion;
     }
+
 
     @Override
     public void undo() {
         if (!insertedUndo.empty()) {
             insertedUndo.peek().undo();
             insertedRedo.push(insertedUndo.pop());
+            currentVersion--;
         } else {
             if (!undo.empty()) {
                 redo.push(undo.pop());
+                currentVersion--;
             }
         }
     }
@@ -90,9 +97,11 @@ public class PersistentArray<E> extends PersistentCollection implements List<E> 
         if (!insertedRedo.empty()) {
             insertedRedo.peek().redo();
             insertedUndo.push(insertedRedo.pop());
+            currentVersion++;
         } else {
             if (!redo.empty()) {
                 undo.push(redo.pop());
+                currentVersion++;
             }
         }
     }
@@ -111,8 +120,9 @@ public class PersistentArray<E> extends PersistentCollection implements List<E> 
         return getCurrentHead().getSize() <= 0;
     }
 
+
     public int getVersionCount() {
-        return undo.size() + redo.size();
+        return (int) currentVersion;
     }
 
     @Override
@@ -126,6 +136,7 @@ public class PersistentArray<E> extends PersistentCollection implements List<E> 
         ArrayNode<E> copedNode = copedNodeP.getKey();
         copedNode.getValue().set(leafIndex, element);
 
+        currentVersion++;
         tryParentUndo(element);
 
         return result;
@@ -146,6 +157,8 @@ public class PersistentArray<E> extends PersistentCollection implements List<E> 
         ArrayHead<E> newHead = new ArrayHead<>(getCurrentHead(), 0);
         undo.push(newHead);
         redo.clear();
+
+        currentVersion++;
         tryParentUndo(element);
 
         return add(newHead, element);
@@ -210,6 +223,7 @@ public class PersistentArray<E> extends PersistentCollection implements List<E> 
             }
         }
 
+        currentVersion++;
         return result;
     }
 
@@ -226,6 +240,7 @@ public class PersistentArray<E> extends PersistentCollection implements List<E> 
             newHead = new ArrayHead<>();
             undo.push(newHead);
             redo.clear();
+            currentVersion++;
         } else {
             AbstractMap.SimpleEntry<ArrayNode<E>, Integer> copedNodeP = copyLeafToMove(oldHead, index);
             int leafIndex = copedNodeP.getValue();
@@ -234,6 +249,7 @@ public class PersistentArray<E> extends PersistentCollection implements List<E> 
 
             newHead = getCurrentHead();
             newHead.setSize(newHead.getSize() - 1);
+            currentVersion++;
         }
 
         for (int i = index + 1; i < oldHead.getSize(); i++) {
@@ -248,6 +264,7 @@ public class PersistentArray<E> extends PersistentCollection implements List<E> 
         ArrayHead<E> head = new ArrayHead<>();
         undo.push(head);
         redo.clear();
+        currentVersion++;
     }
 
     @Override

@@ -1,0 +1,13 @@
+/home/darya/smp_final_project/persistent-data-structure-lib/src/main/java/ru/nsu/ccfit/persistent/data/structure/array/utils/ArrayNode.java
+/home/darya/smp_final_project/persistent-data-structure-lib/src/main/java/ru/nsu/ccfit/persistent/data/structure/node/SlimNode.java
+/home/darya/smp_final_project/persistent-data-structure-lib/src/main/java/ru/nsu/ccfit/persistent/data/structure/node/ModificationType.java
+/home/darya/smp_final_project/persistent-data-structure-lib/src/main/java/ru/nsu/ccfit/persistent/data/structure/array/PersistentArray.java
+/home/darya/smp_final_project/persistent-data-structure-lib/src/main/java/ru/nsu/ccfit/persistent/data/structure/array/utils/ArrayHead.java
+/home/darya/smp_final_project/persistent-data-structure-lib/src/main/java/ru/nsu/ccfit/persistent/data/structure/map/FatNodePersistentMap.java
+/home/darya/smp_final_project/persistent-data-structure-lib/src/main/java/ru/nsu/ccfit/persistent/data/structure/node/ModificationBox.java
+/home/darya/smp_final_project/persistent-data-structure-lib/src/main/java/ru/nsu/ccfit/persistent/data/structure/PersistentStructure.java
+/home/darya/smp_final_project/persistent-data-structure-lib/src/main/java/ru/nsu/ccfit/persistent/data/structure/array/utils/PersistentCollection.java
+/home/darya/smp_final_project/persistent-data-structure-lib/src/main/java/ru/nsu/ccfit/persistent/data/structure/node/FatNode.java
+/home/darya/smp_final_project/persistent-data-structure-lib/src/main/java/ru/nsu/ccfit/persistent/data/structure/node/ModificationBoxNode.java
+/home/darya/smp_final_project/persistent-data-structure-lib/src/main/java/ru/nsu/ccfit/persistent/data/structure/list/PersistentDoubleLinkedList.java
+/home/darya/smp_final_project/persistent-data-structure-lib/src/main/java/ru/nsu/ccfit/persistent/data/structure/map/PersistentMap.java
